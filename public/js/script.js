@@ -20,11 +20,19 @@ function validar(){
 
 $("#enviar").click( function() {
     if ( !validar()){
-        console.log("error");
+        $("#msg_nok").css("display","block");
+        desaparece($("#msg_nok"));
     }
     else{
-        console.log("correcto");
+        $("#msg_ok").css("display","block");
+        $.ajax({
+            type: "POST",
+            url: "/test/",
+            data: {data: $("#a_app").val()}
+        })
     }
+    window.scrollTo(0,document.body.scrollHeight);
+
 });
 
 $(".app").on('input',function(e){
@@ -37,3 +45,8 @@ function replicate(val){
     })
 }
 
+function desaparece(e){
+    setTimeout(function(){
+        e.css("display","none");
+    }, 5000);
+}

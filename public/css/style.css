@@ -28,3 +28,7 @@ form{
 .row{
   padding-bottom: 20px;
 }
+
+.alert{
+  display: none;
+}

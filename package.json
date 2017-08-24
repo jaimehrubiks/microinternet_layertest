@@ -1,0 +1,24 @@
+{
+  "name": "microinternet_layertest",
+  "version": "1.0.0",
+  "description": "Test for attendees for an educative conference on internet basics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaimehrubiks/microinternet_layertest.git"
+  },
+  "author": "jaimehrubiks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaimehrubiks/microinternet_layertest/issues"
+  },
+  "homepage": "https://github.com/jaimehrubiks/microinternet_layertest#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "socket.io": "^2.0.3"
+  }
+}
