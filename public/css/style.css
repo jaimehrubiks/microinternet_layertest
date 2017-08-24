@@ -2,11 +2,29 @@
 body {
   margin: 0;
   padding: 0;
-  padding-top: 50px;
+  padding-top: 10px;
 }
 
 
 .contenido{
   text-align: center;
   padding-top: 50px;
+  width: 900px;
+}
+form{
+  padding: 10px;
+  margin: 10;
+}
+.paquete{
+  width: 260px !important;
+  background-color: gainsboro;
+  padding: 10px;
+  margin: 10;
+}
+.col{
+  margin: 10px;
+}
+
+.row{
+  padding-bottom: 20px;
 }
