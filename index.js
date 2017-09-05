@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 app.post('/test/', function(req, res){
     console.log(req.body.data);
-    io.emit('new', 'new user got!');
+    io.emit('msg', req.body.data);
     res.status(200).end();
 });
 

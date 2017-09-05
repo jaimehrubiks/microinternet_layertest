@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Bilbao Dynamics / jaimehrubiks">
+
+    <title>Demuestra lo aprendido</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+
+    <div class="container contenido">
+
+
+      <div class="row">
+        <div class="col">
+          <h1>Solución del reto</h1>
+          <p class="lead">Observa el contenido del paquete a lo largo de la trayectoria de la red</p>
+          <img src="img/maqueta.jpg">
+          
+          <img style="display: none; margin-top: 10px;" id="solucion" src="img/solucion.png">
+        </div>
+      </div>
+
+      <div id="solucionfloat">
+          <ul class="list-group">
+            <li class="list-group-item active" id="data"></li>
+            <li class="list-group-item" id="transport"></li>
+            <li class="list-group-item" id="net"></li>
+            <li class="list-group-item" id="mac"></li>
+          </ul>
+      </div>
+
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/script.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.on('connect', function(){}); 
+        socket.on('event', function(data){});
+        socket.on('disconnect', function(){});
+        socket.on('msg',function(data){
+            if(lenA==0)
+                newEvent(data);
+            else
+                eventQ.push(data);
+        })
+        
+        function newEvent(data){
+            lenA=1;
+            gotData=data;
+            fillPacket("","","","");
+            $("#solucionfloat").css("left", 0);
+            $("#solucionfloat").css("visibility", "visible");
+            $("#solucion").css("display", "none");
+            console.log(data);
+            animate();
+        }
+
+        var eventQ=[];
+        var lenA=0;
+        var lenB=810;
+        var step0=80;
+        var step1=300;
+        var step2=500;
+        var step3=700;
+        var gotData="AppData";
+        function animate(){
+            if(lenA==step0)     fillPacket(gotData, 'TCP PORT 80', 'IP src: 192.168.1.2\nIP dst: 192.168.3.2', 'MAC src: AA:AA:AA:AA:AA:AA\nMAC dst: BB:BB:BB:BB:BB:BB');
+            if(lenA==step1)     fillPacket(gotData, 'TCP PORT 80', 'IP src: 192.168.1.2\nIP dst: 192.168.3.2', 'MAC src: CC:CC:CC:CC:CC:CC\nMAC dst: DD:DD:DD:DD:DD:DD');
+            if(lenA==step2)     fillPacket(gotData, 'TCP PORT 80', 'IP src: 192.168.1.2\nIP dst: 192.168.3.2', 'MAC src: EE:EE:EE:EE:EE:EE\nMAC dst: 00:00:00:00:00:00');
+            if(lenA==step3){
+                $("#solucionfloat").css("visibility", "hidden");
+                $("#solucion").css("display", "block");
+            }
+            
+            $("#solucionfloat").css("left", lenA+"px" );
+            lenA++;
+            if (lenA < lenB-100 ){
+                /*
+                requestAnimationFrame(function(){
+                    animate();
+                })
+                */ 
+                setTimeout(function(){animate()},30)
+            }else{
+                if(eventQ.length!=0)
+                    newEvent(eventQ.pop());
+            } 
+
+
+        }
+        function fillPacket(data, transport, net, mac){
+            $("#data").text(data);
+            $("#transport").text(transport);
+            $("#net").text(net);
+            $("#mac").text(mac);
+        }
+
+        
+    </script>
+
+  </body>
+</html>
