@@ -6,7 +6,7 @@ Test for attendees for an educative conference on internet basics
 git clone https://github.com/jaimehrubiks/microinternet_layertest  
 cd microinternet_layertest  
 npm install  
-node indes.js  
+node index.js  
 ```
 
 # Web
